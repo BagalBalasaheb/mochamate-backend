@@ -16,7 +16,11 @@ const auth = require('./controllers/auth')
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:4200',  // Replace with your frontend URL for production
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Define the allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Specify the allowed headers
+}));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
