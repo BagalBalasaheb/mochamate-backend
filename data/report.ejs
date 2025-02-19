@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             margin: 0;
             padding: 20px;
         }
+
         .container {
             width: 700px;
             margin: auto;
@@ -19,40 +21,49 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
         .header {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .header img {
             max-width: 150px;
         }
+
         .header h2 {
             margin: 10px 0;
             color: #333;
             font-size: 24px;
         }
+
         .company-details {
             text-align: right;
             margin-bottom: 30px;
             font-size: 14px;
             color: #666;
         }
+
         .customer-info {
             margin-bottom: 30px;
         }
+
         .customer-info h3 {
             font-size: 18px;
             margin-bottom: 10px;
         }
+
         .customer-info p {
             font-size: 14px;
             margin: 5px 0;
         }
+
         .invoice-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
+
         .invoice-table th,
         .invoice-table td {
             border: 1px solid #ddd;
@@ -60,19 +71,23 @@
             text-align: left;
             font-size: 14px;
         }
+
         .invoice-table th {
             background-color: #f8f8f8;
         }
+
         .total-section {
             text-align: right;
             font-size: 16px;
             margin-top: 20px;
         }
+
         .total-section h3 {
             font-size: 20px;
             margin-top: 10px;
             font-weight: bold;
         }
+
         .footer {
             text-align: center;
             margin-top: 40px;
@@ -81,64 +96,85 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <!-- Header Section -->
-    <div class="header">
-        <h2>MochaMate</h2>
-        <p>Pune</p>
-    </div>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h2>MochaMate</h2>
+            <p>Pune</p>
+        </div>
 
-    <!-- Customer Info -->
-    <div class="customer-info">
-        <h3>Bill To:</h3>
-        <p><strong>Name:</strong> <%= bill.name %></p>
-        <p><strong>Email:</strong> <%= bill.email %></p>
-        <p><strong>Contact Number:</strong> <%= bill.contactNumber %></p>
-    </div>
+        <!-- Customer Info -->
+        <div class="customer-info">
+            <h3>Bill To:</h3>
+            <p><strong>Name:</strong>
+                <%= bill.name %>
+            </p>
+            <p><strong>Email:</strong>
+                <%= bill.email %>
+            </p>
+            <p><strong>Contact Number:</strong>
+                <%= bill.contactNumber %>
+            </p>
+        </div>
 
-    <!-- Product Details -->
-    <h3>Product Details:</h3>
-    <table class="invoice-table">
-        <thead>
-            <tr>
-                <th>No</th> <!-- Added No column -->
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% if (bill.productDetails && bill.productDetails.length > 0) { %>
-                <% let serialNumber = 1; %> <!-- Start serial number -->
-                <% bill.productDetails.forEach(item => { %>
-                    <tr>
-                        <td><%= serialNumber++ %></td> <!-- Serial number column -->
-                        <td><%= item.name %></td>
-                        <td><%= item.quantity %></td>
-                        <td>₹<%= item.price.toFixed(2) %></td>
-                        <td>₹<%= (item.quantity * item.price).toFixed(2) %></td>
-                    </tr>
-                <% }); %>
-            <% } else { %>
-                <tr><td colspan="5">No product details available.</td></tr>
-            <% } %>
-        </tbody>
-    </table>
+        <!-- Product Details -->
+        <h3>Product Details:</h3>
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>No</th> <!-- Added No column -->
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (bill.productDetails && bill.productDetails.length> 0) { %>
+                    <% let serialNumber=1; %> <!-- Start serial number -->
+                        <% bill.productDetails.forEach(item=> { %>
+                            <tr>
+                                <td>
+                                    <%= serialNumber++ %>
+                                </td> <!-- Serial number column -->
+                                <td>
+                                    <%= item.name %>
+                                </td>
+                                <td>
+                                    <%= item.quantity %>
+                                </td>
+                                <td>₹<%= item.price.toFixed(2) %>
+                                </td>
+                                <td>₹<%= (item.quantity * item.price).toFixed(2) %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="5">No product details available.</td>
+                                    </tr>
+                                    <% } %>
+            </tbody>
+        </table>
 
-    <!-- Payment Method and Total -->
-    <div class="total-section">
-        <p><strong>Payment Method:</strong> <%= bill.paymentMethod %></p>
-        <h3><strong>Total Amount:</strong> ₹<%= (bill.total / 100).toFixed(2) %></h3> <!-- Assuming total is in cents -->
-    </div>
+        <!-- Payment Method and Total -->
+        <div class="total-section">
+            <p><strong>Payment Method:</strong>
+                <%= bill.paymentMethod %>
+            </p>
+            <h3><strong>Total Amount:</strong> ₹<%= bill.total %>
+            </h3> <!-- Assuming total is in cents -->
+        </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>Thank you for your business!</p>
+        <!-- Footer -->
+        <div class="footer">
+            <p>Thank you for your business!</p>
+        </div>
     </div>
-</div>
 
 </body>
+
 </html>

@@ -16,6 +16,7 @@ const auth = require('./controllers/auth')
 
 const app = express();
 const allowedOrigins = [
+    'http://localhost:4200',
     'https://mochamate.onrender.com',
     'https://mochamate-frontend.onrender.com'
 ];
