@@ -15,13 +15,20 @@ const auth = require('./controllers/auth')
 
 
 const app = express();
+const allowedOrigins = [
+    'https://mochamate.onrender.com',
+    'https://mochamate-frontend.onrender.com'
+];
 
 app.use(cors({
-    origin: 'https://mochamate-frontend.onrender.com', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
 }));
-
-app.options('*', cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
